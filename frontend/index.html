@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>Vue Frontend</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+  <script type="text/x-template" id="app-template">
+    <div style="display: flex; height: 100vh;">
+      <!-- Sidebar -->
+      <div style="width: 200px; background: #1976d2; color: #fff; padding: 20px; min-height: 100vh;">
+        <h2 style="color: #fff;">功能列表</h2>
+        <ul style="list-style: none; padding: 0;">
+          <li :class="{active: currentView==='home'}" style="margin-bottom: 10px;">
+            <a href="#" @click.prevent="currentView='home'" style="color: #fff; text-decoration: none;">首頁</a>
+          </li>
+          <li :class="{active: currentView==='analysis'}" style="margin-bottom: 10px;">
+            <a href="#" @click.prevent="currentView='analysis'" style="color: #fff; text-decoration: none;">資料分析</a>
+          </li>
+          <li :class="{active: currentView==='settings'}">
+            <a href="#" @click.prevent="currentView='settings'" style="color: #fff; text-decoration: none;">設定</a>
+          </li>
+        </ul>
+      </div>
+      <!-- Main Content -->
+      <div style="flex: 1; padding: 30px;">
+        <div v-if="currentView==='home'">
+          <h1>{{ message }}</h1>
+          <button @click="fetchBackend">呼叫後端</button>
+          <p v-if="backendMsg">{{ backendMsg }}</p>
+        </div>
+        <div v-else-if="currentView==='analysis'">
+          <h1>資料分析</h1>
+          <p>這裡是資料分析功能頁面。</p>
+          <ul>
+            <li>上傳資料檔案（未來可擴充）</li>
+            <li>顯示分析結果（未來可擴充）</li>
+          </ul>
+        </div>
+        <div v-else>
+          <h1>設定</h1>
+          <p>這裡是設定功能頁面。</p>
+          <label>
+            <span>主題色彩：</span>
+            <select>
+              <option>淺色</option>
+              <option>深色</option>
+            </select>
+          </label>
+        </div>
+      </div>
+    </div>
+  </script>
+  <script src="./main.js"></script>
+</body>
+</html>
